@@ -33,13 +33,13 @@ def teste_qui_quadrado_variancia_uma_amostra_parametros(variancia_amostral, tama
         non_centrality_parameter = (n - 1) * (variancia_populacional_alternativa / sigma_quadrado_0) 
         if tipo_teste == 'duas_caudas':
             valor_critico_inf, valor_critico_sup = valor_critico
-            power_cauda_inferior = st.ncchi2.cdf(valor_critico_inf, df=graus_de_liberdade, nc=non_centrality_parameter)
-            power_cauda_superior = st.ncchi2.sf(valor_critico_sup, df=graus_de_liberdade, nc=non_centrality_parameter)
+            power_cauda_inferior = st.ncx2.cdf(valor_critico_inf, df=graus_de_liberdade, nc=non_centrality_parameter)
+            power_cauda_superior = st.ncx2.sf(valor_critico_sup, df=graus_de_liberdade, nc=non_centrality_parameter)
             power = power_cauda_inferior + power_cauda_superior
         elif tipo_teste == 'cauda_esquerda':
-            power = st.ncchi2.cdf(valor_critico, df=graus_de_liberdade, nc=non_centrality_parameter)
+            power = st.ncx2.cdf(valor_critico, df=graus_de_liberdade, nc=non_centrality_parameter)
         elif tipo_teste == 'cauda_direita':
-            power = st.ncchi2.sf(valor_critico, df=graus_de_liberdade, nc=non_centrality_parameter)
+            power = st.ncx2.sf(valor_critico, df=graus_de_liberdade, nc=non_centrality_parameter)
 
     return {'estatistica_teste': estatistica_teste, 'p_valor': p_valor, 'hipotese_rejeitada': hipotese_rejeitada, 'alfa': alfa, 'tipo_teste': tipo_teste, 'graus_de_liberdade': graus_de_liberdade, 'valor_critico': valor_critico, 'power': power}
 
