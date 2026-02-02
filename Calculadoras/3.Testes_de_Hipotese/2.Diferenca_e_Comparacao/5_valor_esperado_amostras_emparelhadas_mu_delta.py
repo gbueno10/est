@@ -17,7 +17,8 @@ def teste_t_amostras_emparelhadas(
     sd = 1.2,                     # desvio padrão das diferenças (sd)
     diff0 = 0.0,                  # H0: μΔ = diff0
     alfa = 0.05,
-    tipo_teste = 'duas_caudas'
+    tipo_teste = 'duas_caudas',
+    diff_alternativa = None       # Diferença real sob Ha para cálculo de poder
 ):
     """
     Teste t para a média das diferenças de amostras emparelhadas (dependentes).
@@ -39,12 +40,25 @@ def teste_t_amostras_emparelhadas(
         t_crit_range = stats.t.ppf(1 - alfa, df)
         
     rejeitar_h0 = p_valor < alfa
+
+    # Cálculo da Potência
+    power = None
+    if diff_alternativa is not None:
+        ncp = (diff_alternativa - diff0) / erro_padrao
+        if tipo_teste == 'duas_caudas':
+            power = stats.nct.cdf(t_crit_range[0], df, ncp) + stats.nct.sf(t_crit_range[1], df, ncp)
+        elif tipo_teste == 'cauda_esquerda':
+            power = stats.nct.cdf(t_crit_range, df, ncp)
+        else:
+            power = stats.nct.sf(t_crit_range, df, ncp)
     
     print(f"📊 TESTE t PARA AMOSTRAS EMPARELHADAS (μΔ)")
     print(f"H0: μΔ = {diff0} | Ha: μΔ {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} {diff0}")
     print(f"Graus de Liberdade: {df}")
     print(f"Estatística t: {t_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para Δ={diff_alternativa}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização

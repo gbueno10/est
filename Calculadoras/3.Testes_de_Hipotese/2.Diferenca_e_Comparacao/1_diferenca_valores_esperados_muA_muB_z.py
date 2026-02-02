@@ -20,7 +20,8 @@ def teste_z_diferenca_medias(
     sigma2 = 3.0,                 # σ de B (conhecido)
     diff0 = 0.0,                  # diferença hipotética (H0: μA - μB = diff0)
     alfa = 0.05,                  # significância
-    tipo_teste = 'duas_caudas'    # tipo
+    tipo_teste = 'duas_caudas',   # tipo
+    diff_alternativa = None       # diferença real sob Ha para cálculo de poder
 ):
     """
     Teste Z para a diferença entre médias de duas populações independentes (σ conhecidos).
@@ -41,11 +42,24 @@ def teste_z_diferenca_medias(
         z_crit = stats.norm.ppf(1 - alfa)
         
     rejeitar_h0 = p_valor < alfa
+
+    # Cálculo da Potência
+    power = None
+    if diff_alternativa is not None:
+        ncp = (diff_alternativa - diff0) / erro_padrao
+        if tipo_teste == 'duas_caudas':
+            power = stats.norm.cdf(z_crit[0] - ncp) + (1 - stats.norm.cdf(z_crit[1] - ncp))
+        elif tipo_teste == 'cauda_esquerda':
+            power = stats.norm.cdf(z_crit - ncp)
+        else:
+            power = 1 - stats.norm.cdf(z_crit - ncp)
     
     print(f"📊 TESTE Z PARA DIFERENÇA DE MÉDIAS (μA - μB)")
     print(f"H0: μA - μB = {diff0} | Ha: μA - μB {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} {diff0}")
     print(f"Estatística Z: {z_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para Δ={diff_alternativa}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização

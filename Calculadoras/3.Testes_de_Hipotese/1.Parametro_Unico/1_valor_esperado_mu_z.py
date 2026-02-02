@@ -17,7 +17,8 @@ def teste_z_media_uma_amostra(
     mu0 = 10.0,                   # média hipotética (H0: μ = mu0)
     sigma = 2.0,                  # desvio padrão populacional (σ) conhecido
     alfa = 0.05,                  # nível de significância
-    tipo_teste = 'duas_caudas'    # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    tipo_teste = 'duas_caudas',   # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    mu_alternativo = None         # μ sob Ha para cálculo de poder (ex: 11.0)
 ):
     """
     Executa o Teste Z para a média de uma amostra com σ conhecido.
@@ -41,11 +42,33 @@ def teste_z_media_uma_amostra(
         
     rejeitar_h0 = p_valor < alfa
     
+    # Cálculo da Potência (Power = 1 - Beta) se mu_alternativo for fornecido
+    power = None
+    if mu_alternativo is not None:
+        # Distância em desvios padrão (Efeito)
+        efeito = (mu_alternativo - mu0) / sigma
+        # Para duas caudas, a potência é a soma das probabilidades nas caudas da nova distribuição
+        if tipo_teste == 'duas_caudas':
+            z_crit_inf = stats.norm.ppf(alfa/2)
+            z_crit_sup = stats.norm.ppf(1 - alfa/2)
+            ncp = (mu_alternativo - mu0) / (sigma / np.sqrt(n))
+            power = stats.norm.cdf(z_crit_inf - ncp) + (1 - stats.norm.cdf(z_crit_sup - ncp))
+        elif tipo_teste == 'cauda_esquerda':
+            z_crit = stats.norm.ppf(alfa)
+            ncp = (mu_alternativo - mu0) / (sigma / np.sqrt(n))
+            power = stats.norm.cdf(z_crit - ncp)
+        else:
+            z_crit = stats.norm.ppf(1 - alfa)
+            ncp = (mu_alternativo - mu0) / (sigma / np.sqrt(n))
+            power = 1 - stats.norm.cdf(z_crit - ncp)
+
     print(f"📊 TESTE Z PARA A MÉDIA (μ)")
     print(f"H0: μ = {mu0} | Ha: μ {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} {mu0}")
     print(f"Estatística Z: {z_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
     print(f"Valor Crítico: {z_crit}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para μ={mu_alternativo}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização
@@ -70,9 +93,8 @@ def teste_z_media_uma_amostra(
     ax.axvline(z_stat, color='black', linestyle='--', lw=2, label=f'Z observado = {z_stat:.2f}')
     ax.set_title(f"Distribuição Normal Padrão - {teste_nome if 'teste_nome' in locals() else 'Teste Z'}")
     ax.legend()
-    plt.show()
     
-    return {'z_stat': z_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
+    return {'estatistica_teste': z_stat, 'p_valor': p_valor, 'hipotese_rejeitada': rejeitar_h0, 'alfa': alfa, 'tipo_teste': tipo_teste, 'valor_critico': z_crit, 'power': power}
 
 if __name__ == "__main__":
     teste_z_media_uma_amostra(

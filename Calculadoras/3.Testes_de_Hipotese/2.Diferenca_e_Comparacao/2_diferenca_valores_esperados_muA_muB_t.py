@@ -21,7 +21,8 @@ def teste_t_diferenca_medias(
     diff0 = 0.0,                  # H0: μA - μB = diff0
     variancias_iguais = True,     # True: pooled variance, False: Welch
     alfa = 0.05,
-    tipo_teste = 'duas_caudas'
+    tipo_teste = 'duas_caudas',
+    diff_alternativa = None       # Diferença real sob Ha para cálculo de poder
 ):
     """
     Teste t para a diferença entre médias de duas populações independentes (σ desconhecidos).
@@ -55,6 +56,17 @@ def teste_t_diferenca_medias(
         t_crit = stats.t.ppf(1 - alfa, df)
         
     rejeitar_h0 = p_valor < alfa
+
+    # Cálculo da Potência
+    power = None
+    if diff_alternativa is not None:
+        ncp = (diff_alternativa - diff0) / erro_padrao
+        if tipo_teste == 'duas_caudas':
+            power = stats.nct.cdf(t_crit[0], df, ncp) + stats.nct.sf(t_crit[1], df, ncp)
+        elif tipo_teste == 'cauda_esquerda':
+            power = stats.nct.cdf(t_crit, df, ncp)
+        else:
+            power = stats.nct.sf(t_crit, df, ncp)
     
     print(f"📊 TESTE t PARA DIFERENÇA DE MÉDIAS (μA - μB)")
     print(f"Método: {metodo}")
@@ -62,6 +74,8 @@ def teste_t_diferenca_medias(
     print(f"H0: μA - μB = {diff0} | Ha: μA - μB {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} {diff0}")
     print(f"Estatística t: {t_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para Δ={diff_alternativa}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização

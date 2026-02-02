@@ -16,7 +16,8 @@ def teste_z_proporcao_uma_amostra(
     n = 100,                       # tamanho da amostra (n)
     p0 = 0.50,                     # proporção hipotética (H0: p = p0)
     alfa = 0.05,                   # nível de significância
-    tipo_teste = 'duas_caudas'     # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    tipo_teste = 'duas_caudas',    # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    p_alternativo = None           # p sob Ha para cálculo de poder
 ):
     """
     Executa o Teste Z para a proporção de uma amostra.
@@ -38,12 +39,29 @@ def teste_z_proporcao_uma_amostra(
         z_crit = stats.norm.ppf(1 - alfa)
         
     rejeitar_h0 = p_valor < alfa
+
+    # Cálculo da Potência
+    power = None
+    if p_alternativo is not None:
+        sigma_alt = np.sqrt((p_alternativo * (1 - p_alternativo)) / n)
+        if tipo_teste == 'duas_caudas':
+            # Pontos críticos em termos de proporção
+            p_crit_inf = p0 + z_crit[0] * erro_padrao
+            p_crit_sup = p0 + z_crit[1] * erro_padrao
+            power = stats.norm.cdf(p_crit_inf, p_alternativo, sigma_alt) + (1 - stats.norm.cdf(p_crit_sup, p_alternativo, sigma_alt))
+        elif tipo_teste == 'cauda_esquerda':
+            p_crit = p0 + z_crit * erro_padrao
+            power = stats.norm.cdf(p_crit, p_alternativo, sigma_alt)
+        else:
+            p_crit = p0 + z_crit * erro_padrao
+            power = 1 - stats.norm.cdf(p_crit, p_alternativo, sigma_alt)
     
     print(f"📊 TESTE Z PARA PROPORÇÃO (p)")
     print(f"H0: p = {p0} | Ha: p {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} {p0}")
     print(f"Estatística Z: {z_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
-    print(f"Valor Crítico: {z_crit}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para p={p_alternativo}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização

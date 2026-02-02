@@ -16,7 +16,8 @@ def teste_qui_quadrado_variancia(
     n = 20,                        # tamanho da amostra (n)
     sigma2_0 = 4.0,                # variância hipotética (H0: σ² = sigma2_0)
     alfa = 0.05,                   # nível de significância
-    tipo_teste = 'duas_caudas'     # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    tipo_teste = 'duas_caudas',    # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    sigma2_alternativo = None      # σ² sob Ha para cálculo de poder
 ):
     """
     Executa o Teste Qui-Quadrado para a variância populacional (população Normal).
@@ -39,13 +40,27 @@ def teste_qui_quadrado_variancia(
         chi_crit = stats.chi2.ppf(1 - alfa, df)
         
     rejeitar_h0 = p_valor < alfa
+
+    # Cálculo da Potência (usando Qui-Quadrado Não Central)
+    power = None
+    if sigma2_alternativo is not None:
+        lambda_val = (sigma2_alternativo / sigma2_0)
+        # O poder é a prob de chi_stat estar na região crítica sob sigma2_alt
+        # Ajustamos os pontos críticos pela razão das variâncias
+        if tipo_teste == 'duas_caudas':
+            power = stats.chi2.cdf(chi_crit[0] / lambda_val, df) + (1 - stats.chi2.cdf(chi_crit[1] / lambda_val, df))
+        elif tipo_teste == 'cauda_esquerda':
+            power = stats.chi2.cdf(chi_crit / lambda_val, df)
+        else:
+            power = 1 - stats.chi2.cdf(chi_crit / lambda_val, df)
     
     print(f"📊 TESTE QUI-QUADRADO PARA VARIANÇA (σ²)")
     print(f"H0: σ² = {sigma2_0} | Ha: σ² {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} {sigma2_0}")
     print(f"Graus de Liberdade: {df}")
     print(f"Estatística χ²: {chi_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
-    print(f"Valor Crítico: {chi_crit}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para σ²={sigma2_alternativo}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização

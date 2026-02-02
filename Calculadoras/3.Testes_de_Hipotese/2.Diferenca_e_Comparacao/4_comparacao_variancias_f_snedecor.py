@@ -17,7 +17,8 @@ def teste_f_comparacao_variancias(
     var2 = 2.0,                   # variância amostra B (sB²)
     n2 = 15,                      # n de B
     alfa = 0.05,
-    tipo_teste = 'duas_caudas'    # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    tipo_teste = 'duas_caudas',   # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+    razao_alternativa = None      # Razão real (σA²/σB²) sob Ha para cálculo de poder
 ):
     """
     Teste F para a comparação (razão) das variâncias de duas populações Normais.
@@ -42,12 +43,25 @@ def teste_f_comparacao_variancias(
         f_crit = stats.f.ppf(1 - alfa, dfn, dfd)
         
     rejeitar_h0 = p_valor < alfa
+
+    # Cálculo da Potência
+    power = None
+    if razao_alternativa is not None:
+        if tipo_teste == 'duas_caudas':
+            power = stats.f.cdf(f_crit[0] / razao_alternativa, dfn, dfd) + \
+                    (1 - stats.f.cdf(f_crit[1] / razao_alternativa, dfn, dfd))
+        elif tipo_teste == 'cauda_esquerda':
+            power = stats.f.cdf(f_crit / razao_alternativa, dfn, dfd)
+        else:
+            power = 1 - stats.f.cdf(f_crit / razao_alternativa, dfn, dfd)
     
     print(f"📊 TESTE F PARA RAZÃO DE VARIÂNCIAS (σA² / σB²)")
     print(f"H0: σA² = σB² | Ha: σA² {'≠' if tipo_teste=='duas_caudas' else '<' if tipo_teste=='cauda_esquerda' else '>'} σB²")
     print(f"Graus de Liberdade: Num={dfn}, Den={dfd}")
     print(f"Estatística F: {f_stat:.4f}")
     print(f"P-valor: {p_valor:.4f}")
+    if power is not None:
+        print(f"Potência do Teste (1-β) para razão={razao_alternativa}: {power:.4f}")
     print(f"Resultado: {'❌ REJEITAR H0' if rejeitar_h0 else '✅ NÃO REJEITAR H0'}")
     
     # Visualização
