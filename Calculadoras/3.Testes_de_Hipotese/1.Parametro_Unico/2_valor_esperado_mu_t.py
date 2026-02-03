@@ -18,7 +18,8 @@ def teste_t_media_uma_amostra(
     s = 2.0,                      # desvio padrão amostral (s)
     alfa = 0.05,                  # nível de significância
     tipo_teste = 'duas_caudas',   # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
-    mu_alternativo = None         # μ sob Ha para cálculo de poder
+    mu_alternativo = None,        # μ sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Executa o Teste t para a média de uma amostra com σ desconhecido.
@@ -83,6 +84,8 @@ def teste_t_media_uma_amostra(
     ax.axvline(t_stat, color='black', linestyle='--', lw=2, label=f't observado = {t_stat:.2f}')
     ax.set_title(f"Distribuição t-Student (df={df})")
     ax.legend()
+    if show_plot:
+        plt.show()
     
     return {'estatistica_teste': t_stat, 'p_valor': p_valor, 'hipotese_rejeitada': rejeitar_h0, 'alfa': alfa, 'tipo_teste': tipo_teste, 'valor_critico': t_crit, 'power': power, 'graus_de_liberdade': df}
 
@@ -93,5 +96,6 @@ if __name__ == "__main__":
         mu0 = 10.0,               # valor de H0
         s = 2.0,                  # desvio padrão amostral s
         alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas'# tipo
+        tipo_teste = 'duas_caudas',# tipo
+        # show_plot = True        # Descomente para ver o gráfico
     )

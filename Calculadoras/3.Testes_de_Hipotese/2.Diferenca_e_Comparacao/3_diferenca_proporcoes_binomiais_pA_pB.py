@@ -19,7 +19,8 @@ def teste_z_diferenca_proporcoes(
     diff0 = 0.0,                  # H0: pA - pB = diff0
     alfa = 0.05,
     tipo_teste = 'duas_caudas',
-    diff_alternativa = None       # Diferença real sob Ha para cálculo de poder
+    diff_alternativa = None,      # Diferença real sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Teste Z para a diferença entre proporções binomiais de duas populações independentes.
@@ -89,6 +90,8 @@ def teste_z_diferenca_proporcoes(
     ax.axvline(z_stat, color='black', linestyle='--', lw=2, label=f'Z observado = {z_stat:.2f}')
     ax.set_title("Diferença entre Proporções Binomiais (pA - pB)")
     ax.legend()
+    if show_plot:
+        plt.show()
     
     return {
         'estatistica_teste': z_stat,
@@ -103,5 +106,6 @@ def teste_z_diferenca_proporcoes(
 if __name__ == "__main__":
     teste_z_diferenca_proporcoes(
         p1 = 0.60, n1 = 100,
-        p2 = 0.50, n2 = 120
+        p2 = 0.50, n2 = 120,
+        # show_plot = True        # Descomente para ver o gráfico
     )

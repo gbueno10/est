@@ -22,7 +22,8 @@ def teste_t_diferenca_medias(
     variancias_iguais = True,     # True: pooled variance, False: Welch
     alfa = 0.05,
     tipo_teste = 'duas_caudas',
-    diff_alternativa = None       # Diferença real sob Ha para cálculo de poder
+    diff_alternativa = None,      # Diferença real sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Teste t para a diferença entre médias de duas populações independentes (σ desconhecidos).
@@ -95,7 +96,8 @@ def teste_t_diferenca_medias(
     ax.axvline(t_stat, color='black', linestyle='--', lw=2, label=f't observado = {t_stat:.2f}')
     ax.set_title(f"Diferença de Valores Esperados (μA - μB) - Distribuição t (df={df:.1f})")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'t_stat': t_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
@@ -103,5 +105,6 @@ if __name__ == "__main__":
     teste_t_diferenca_medias(
         media1 = 12.5, n1 = 15, s1 = 1.8,
         media2 = 11.0, n2 = 12, s2 = 2.2,
-        variancias_iguais = True
+        variancias_iguais = True,
+        # show_plot = True        # Descomente para ver o gráfico
     )

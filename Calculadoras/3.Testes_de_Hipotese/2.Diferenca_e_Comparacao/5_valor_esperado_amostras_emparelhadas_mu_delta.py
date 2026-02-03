@@ -18,7 +18,8 @@ def teste_t_amostras_emparelhadas(
     diff0 = 0.0,                  # H0: μΔ = diff0
     alfa = 0.05,
     tipo_teste = 'duas_caudas',
-    diff_alternativa = None       # Diferença real sob Ha para cálculo de poder
+    diff_alternativa = None,      # Diferença real sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Teste t para a média das diferenças de amostras emparelhadas (dependentes).
@@ -78,11 +79,13 @@ def teste_t_amostras_emparelhadas(
     ax.axvline(t_stat, color='black', linestyle='--', lw=2, label=f't observado = {t_stat:.2f}')
     ax.set_title(f"Amostras Emparelhadas (Média das Diferenças μΔ) - Distribuição t (df={df})")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'t_stat': t_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
 if __name__ == "__main__":
     teste_t_amostras_emparelhadas(
-        media_diff = 2.5, n = 10, sd = 1.2
+        media_diff = 2.5, n = 10, sd = 1.2,
+        # show_plot = True        # Descomente para ver o gráfico
     )

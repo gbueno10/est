@@ -18,7 +18,8 @@ def teste_z_media_uma_amostra(
     sigma = 2.0,                  # desvio padrão populacional (σ) conhecido
     alfa = 0.05,                  # nível de significância
     tipo_teste = 'duas_caudas',   # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
-    mu_alternativo = None         # μ sob Ha para cálculo de poder (ex: 11.0)
+    mu_alternativo = None,        # μ sob Ha para cálculo de poder (ex: 11.0)
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Executa o Teste Z para a média de uma amostra com σ conhecido.
@@ -93,15 +94,18 @@ def teste_z_media_uma_amostra(
     ax.axvline(z_stat, color='black', linestyle='--', lw=2, label=f'Z observado = {z_stat:.2f}')
     ax.set_title(f"Distribuição Normal Padrão - {teste_nome if 'teste_nome' in locals() else 'Teste Z'}")
     ax.legend()
+    if show_plot:
+        plt.show()
     
     return {'estatistica_teste': z_stat, 'p_valor': p_valor, 'hipotese_rejeitada': rejeitar_h0, 'alfa': alfa, 'tipo_teste': tipo_teste, 'valor_critico': z_crit, 'power': power}
 
 if __name__ == "__main__":
     teste_z_media_uma_amostra(
-        media_amostral = 10.5,    # média amostral Observada
-        n = 30,                   # n
-        mu0 = 10.0,               # valor de H0
-        sigma = 2.0,              # sigma conhecido
+        media_amostral = 2.3,    # média amostral Observada
+        n = 50,                   # n
+        mu0 = 3,               # valor de H0
+        sigma = 2.62245,              # sigma conhecido
         alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas'# tipo
+        tipo_teste = 'duas_caudas',# tipo
+        show_plot = True        # Descomente para ver o gráfico
     )

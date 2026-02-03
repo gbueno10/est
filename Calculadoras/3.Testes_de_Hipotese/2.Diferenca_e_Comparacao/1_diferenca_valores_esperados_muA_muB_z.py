@@ -21,7 +21,8 @@ def teste_z_diferenca_medias(
     diff0 = 0.0,                  # diferença hipotética (H0: μA - μB = diff0)
     alfa = 0.05,                  # significância
     tipo_teste = 'duas_caudas',   # tipo
-    diff_alternativa = None       # diferença real sob Ha para cálculo de poder
+    diff_alternativa = None,      # diferença real sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Teste Z para a diferença entre médias de duas populações independentes (σ conhecidos).
@@ -79,7 +80,8 @@ def teste_z_diferenca_medias(
     ax.axvline(z_stat, color='black', linestyle='--', lw=2, label=f'Z observado = {z_stat:.2f}')
     ax.set_title("Diferença de Valores Esperados (μA - μB) - Distribuição Normal Padrão")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'z_stat': z_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
@@ -87,5 +89,6 @@ if __name__ == "__main__":
     teste_z_diferenca_medias(
         media1 = 15.0, n1 = 40, sigma1 = 2.5,
         media2 = 13.5, n2 = 35, sigma2 = 3.0,
-        diff0 = 0.0, alfa = 0.05, tipo_teste = 'duas_caudas'
+        diff0 = 0.0, alfa = 0.05, tipo_teste = 'duas_caudas',
+        # show_plot = True        # Descomente para ver o gráfico
     )

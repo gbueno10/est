@@ -18,7 +18,8 @@ def teste_z_amostras_emparelhadas(
     diff0 = 0.0,                  # H0: μΔ = diff0
     alfa = 0.05,
     tipo_teste = 'duas_caudas',
-    diff_alternativa = None       # Diferença real sob Ha para cálculo de poder
+    diff_alternativa = None,      # Diferença real sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Executa o Teste Z para a média das diferenças de amostras emparelhadas.
@@ -76,11 +77,13 @@ def teste_z_amostras_emparelhadas(
     ax.axvline(z_stat, color='black', linestyle='--', lw=2, label=f'Z observado = {z_stat:.2f}')
     ax.set_title("Amostras Emparelhadas (Amostra Grande) - Distribuição Normal Z")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'z_stat': z_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
 if __name__ == "__main__":
     teste_z_amostras_emparelhadas(
-        media_diff = 2.5, n = 40, sigma_d = 1.5
+        media_diff = 2.5, n = 40, sigma_d = 1.5,
+        # show_plot = True        # Descomente para ver o gráfico
     )

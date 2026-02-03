@@ -18,7 +18,8 @@ def teste_f_comparacao_variancias(
     n2 = 15,                      # n de B
     alfa = 0.05,
     tipo_teste = 'duas_caudas',   # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
-    razao_alternativa = None      # Razão real (σA²/σB²) sob Ha para cálculo de poder
+    razao_alternativa = None,     # Razão real (σA²/σB²) sob Ha para cálculo de poder
+    show_plot = True              # se deve exibir o gráfico
 ):
     """
     Teste F para a comparação (razão) das variâncias de duas populações Normais.
@@ -82,12 +83,14 @@ def teste_f_comparacao_variancias(
     ax.axvline(f_stat, color='black', linestyle='--', lw=2, label=f'F observado = {f_stat:.2f}')
     ax.set_title(f"Razão entre Variâncias (σA² / σB²) - Distribuição F (df1={dfn}, df2={dfd})")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'f_stat': f_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
 if __name__ == "__main__":
     teste_f_comparacao_variancias(
         var1 = 5.0, n1 = 20,
-        var2 = 2.0, n2 = 15
+        var2 = 2.0, n2 = 15,
+        # show_plot = True        # Descomente para ver o gráfico
     )

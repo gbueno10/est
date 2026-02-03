@@ -17,7 +17,8 @@ def teste_z_proporcao_uma_amostra(
     p0 = 0.50,                     # proporção hipotética (H0: p = p0)
     alfa = 0.05,                   # nível de significância
     tipo_teste = 'duas_caudas',    # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
-    p_alternativo = None           # p sob Ha para cálculo de poder
+    p_alternativo = None,          # p sob Ha para cálculo de poder
+    show_plot = True               # se deve exibir o gráfico
 ):
     """
     Executa o Teste Z para a proporção de uma amostra.
@@ -85,7 +86,8 @@ def teste_z_proporcao_uma_amostra(
     ax.axvline(z_stat, color='black', linestyle='--', lw=2, label=f'Z observado = {z_stat:.2f}')
     ax.set_title("Distribuição Normal Padrão (Teste de Proporção)")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'z_stat': z_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
@@ -95,5 +97,6 @@ if __name__ == "__main__":
         n = 100,                  # n
         p0 = 0.50,                # H0: p = 0.5
         alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas'# tipo
+        tipo_teste = 'duas_caudas',# tipo
+        # show_plot = True        # Descomente para ver o gráfico
     )

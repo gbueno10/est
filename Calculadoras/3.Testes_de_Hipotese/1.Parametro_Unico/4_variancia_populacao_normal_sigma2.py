@@ -17,7 +17,8 @@ def teste_qui_quadrado_variancia(
     sigma2_0 = 4.0,                # variância hipotética (H0: σ² = sigma2_0)
     alfa = 0.05,                   # nível de significância
     tipo_teste = 'duas_caudas',    # 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
-    sigma2_alternativo = None      # σ² sob Ha para cálculo de poder
+    sigma2_alternativo = None,     # σ² sob Ha para cálculo de poder
+    show_plot = True               # se deve exibir o gráfico
 ):
     """
     Executa o Teste Qui-Quadrado para a variância populacional (população Normal).
@@ -85,7 +86,8 @@ def teste_qui_quadrado_variancia(
     ax.axvline(chi_stat, color='black', linestyle='--', lw=2, label=f'χ² observado = {chi_stat:.2f}')
     ax.set_title(f"Distribuição Qui-Quadrado (df={df})")
     ax.legend()
-    plt.show()
+    if show_plot:
+        plt.show()
     
     return {'chi_stat': chi_stat, 'p_valor': p_valor, 'rejeitar_h0': rejeitar_h0}
 
@@ -95,5 +97,6 @@ if __name__ == "__main__":
         n = 20,                   # n
         sigma2_0 = 4.0,           # H0: sigma² = 4.0
         alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas'# tipo
+        tipo_teste = 'duas_caudas',# tipo
+        # show_plot = True        # Descomente para ver o gráfico
     )
