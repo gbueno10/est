@@ -28,3 +28,7 @@ Thumbs.db
 *.tmp
 *.bak
 *.log
+
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json

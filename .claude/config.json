@@ -1,0 +1,11 @@
+{
+  "allowedCommands": ["*"],
+  "allowedPaths": ["*"],
+  "autoApprove": true,
+  "permissions": {
+    "bash": "allow",
+    "edit": "allow",
+    "write": "allow",
+    "read": "allow"
+  }
+}

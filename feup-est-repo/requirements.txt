@@ -1,0 +1,11 @@
+# Bibliotecas para Calculadoras de Distribuições Estatísticas
+
+# Computação científica e estatística
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Visualização de dados
+matplotlib>=3.7.0
+
+# Opcional: melhorar aparência dos gráficos
+seaborn>=0.12.0
