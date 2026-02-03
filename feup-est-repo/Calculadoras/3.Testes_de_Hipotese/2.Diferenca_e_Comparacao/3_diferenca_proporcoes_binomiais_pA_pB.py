@@ -105,7 +105,13 @@ def teste_z_diferenca_proporcoes(
 
 if __name__ == "__main__":
     teste_z_diferenca_proporcoes(
-        p1 = 0.60, n1 = 100,
-        p2 = 0.50, n2 = 120,
-        # show_plot = True        # Descomente para ver o gráfico
+        p1 = 0.60,                # proporção amostra A (p̂A)
+        n1 = 100,                 # tamanho da amostra A (n1)
+        p2 = 0.50,                # proporção amostra B (p̂B)
+        n2 = 120,                 # tamanho da amostra B (n2)
+        diff0 = 0.0,              # diferença hipotética (H0: pA - pB = diff0)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        diff_alternativa = 0.05,  # diferença real sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico de regiões de rejeição
     )

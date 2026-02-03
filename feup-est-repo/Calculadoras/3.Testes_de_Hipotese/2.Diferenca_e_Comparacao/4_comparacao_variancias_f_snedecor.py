@@ -90,7 +90,12 @@ def teste_f_comparacao_variancias(
 
 if __name__ == "__main__":
     teste_f_comparacao_variancias(
-        var1 = 5.0, n1 = 20,
-        var2 = 2.0, n2 = 15,
-        # show_plot = True        # Descomente para ver o gráfico
+        var1 = 5.0,               # variância amostra A (sA²)
+        n1 = 20,                  # tamanho da amostra A (n1)
+        var2 = 2.0,               # variância amostra B (sB²)
+        n2 = 15,                  # tamanho da amostra B (n2)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        razao_alternativa = 1.5,  # razão real (σA²/σB²) sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico da distribuição F
     )

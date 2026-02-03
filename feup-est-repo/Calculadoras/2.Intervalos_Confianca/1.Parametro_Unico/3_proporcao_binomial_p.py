@@ -59,7 +59,8 @@ def intervalo_confianca_proporcao(
 
 if __name__ == "__main__":
     intervalo_confianca_proporcao(
-        p_amostral = 0.6,        # proporção amostral (p̂)
-        n = 100,                 # tamanho da amostra (n)
-        nivel_confianca = 0.95   # nível de confiança
+        p_amostral = 0.6,         # proporção amostral (p̂)
+        n = 100,                  # tamanho da amostra (n)
+        nivel_confianca = 0.95,   # nível de confiança (1-α)
+        M = 1000                  # tamanho da população (M) para correção finita (opcional)
     )

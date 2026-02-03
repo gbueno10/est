@@ -32,17 +32,4 @@ Aqui estão os exercícios que exigem o "ritual" dos 4 passos e as inversões (N
 - **Problema 11.9 (Máquinas A e B - Veios):** Compara duas populações tanto na **precisão (variância)** quanto na **proporção de defeituosos**.
 - **Problema 10.7 e 10.8 (Dimensionamento):** Focados puramente em **descobrir o N**. O 10.7 foca em tensão de rotura (média) e o 10.8 em horários de aulas (proporção).
 
-### Bloco 4: Não-Paramétricos e Ajuste
 
-Para quando o professor pede para "verificar a normalidade" ou "repetir sem assumir normalidade".
-
-- **Problema 12.3 (Atrasos de Comboios):** Treina o teste de **Kolmogorov-Smirnov (Lilliefors)** para verificar se os dados seguem uma distribuição Normal.
-- **Problema 12.9 (Frequência vs. Sucesso):** Ótimo para praticar o **Coeficiente de Spearman** e testar se existe associação direta entre duas variáveis quantitativas sem assumir normalidade .
-
----
-
-### Dicas para a sua Revisão com Obsidian + Python:
-
-1. **Isolamento do N:** No Obsidian, tenha uma nota clara: "Como isolar N quando a amplitude do I.C. é dada". Use o **Problema 10.7** para conferir se sua fórmula no Python está batendo com o resultado de $N=37$.
-2. **O p-value Bilateral:** Lembre-se que se o seu script Python cuspir a área de apenas uma cauda e o teste for $\neq$, você deve multiplicar por 2. Use o **Problema 11.9** para validar isso.
-3. **Welch vs. Pool:** Tenha um _if-else_ no seu código Python: "Se o Teste F rejeitar a igualdade de variâncias, use a fórmula de Welch para os graus de liberdade". O **Exame 20-21 (Questão 3)** é o seu padrão de teste para isso.

@@ -58,17 +58,21 @@ def calcular_propriedades_estatisticas(
     print(f"{'='*40}")
 
 if __name__ == "__main__":
+    # Exemplo: X = a + bY
     calcular_transformacao_linear(
-        mu_y = 3.5,         # Média da variável original E(Y)
-        var_y = 1.1,        # Variância da variável original Var(Y)
-        a = 0,              # Constante aditiva (deslocamento)
-        b = 168             # Coeficiente multiplicativo (escala)
+        mu_y = 3.5,               # valor esperado de Y [E(Y)]
+        var_y = 1.1,              # variância de Y [Var(Y)]
+        a = 0,                    # constante aditiva (deslocamento)
+        b = 168                   # coeficiente multiplicativo (escala)
     )
+    
     print("\n")
+    
+    # Exemplo: Propriedades de somas ou múltiplos
     calcular_propriedades_estatisticas(
-        mu_x = 3.5,         # Média da variável original E(X)
-        var_x = 1.1,        # Variância da variável original Var(X)
-        n = 168,            # Multiplicador ou repetições
-        b = 0,              # Constante aditiva (opcional)
-        tipo = "soma_independente" # 'soma_independente' ou 'transformacao_linear'
+        mu_x = 3.5,               # valor esperado de X [E(X)]
+        var_x = 1.1,              # variância de X [Var(X)]
+        n = 168,                  # número de repetições ou multiplicador
+        b = 0,                    # constante aditiva (opcional)
+        tipo = "soma_independente" # 'soma_independente' (n i.i.d) ou 'transformacao_linear' (nX + b)
     )

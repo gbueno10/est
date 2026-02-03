@@ -93,10 +93,11 @@ def teste_z_proporcao_uma_amostra(
 
 if __name__ == "__main__":
     teste_z_proporcao_uma_amostra(
-        p_amostral = 0.65,        # proporção p̂
-        n = 100,                  # n
-        p0 = 0.50,                # H0: p = 0.5
-        alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas',# tipo
-        # show_plot = True        # Descomente para ver o gráfico
+        p_amostral = 0.65,        # proporção observada na amostra (p̂)
+        n = 100,                  # tamanho da amostra (n)
+        p0 = 0.50,                # proporção hipotética (H0: p = p0)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        p_alternativo = 0.55,     # valor de p sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico de regiões de rejeição
     )

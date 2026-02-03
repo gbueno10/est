@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "67cc6ec8bcdd10e9",
+        "id": "7fdbd3d74796ae5f",
         "type": "tabs",
         "children": [
           {
-            "id": "e878a7af895165eb",
+            "id": "0fe7a90c23214edb",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -166,8 +166,8 @@
             "state": {
               "type": "mermaid-toolbar-view",
               "state": {},
-              "icon": "trident-custom",
-              "title": "Mermaid Toolbar"
+              "icon": "lucide-ghost",
+              "title": "mermaid-toolbar-view"
             }
           }
         ],
@@ -185,21 +185,24 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false,
-      "pdf-plus:PDF++: Toggle auto-copy": false,
-      "pdf-plus:PDF++: Toggle auto-focus": false,
-      "pdf-plus:PDF++: Toggle auto-paste": false,
-      "mermaid-tools:Open Mermaid Toolbar": false
+      "bases:Create new base": false
     }
   },
-  "active": "e878a7af895165eb",
+  "active": "0fe7a90c23214edb",
   "lastOpenFiles": [
-    "PDFs/Livro-estatistica.pdf",
-    "Notas/Dimensionamento de Amostra.md",
-    "Untitled/checklist de estudo.md",
-    "Estatística Índice.md",
     "Untitled/Exercícios de Treino.md",
     "Untitled/Treino.md",
+    "Testes de Hipótese.md",
+    "Estatística Índice.md",
+    "Notas/Probabilidade Condicional e Teorema de Bayes.md",
+    "Notas/Dimensionamento de Amostra.md",
+    "Notas/Distribuições e Aproximações.md",
+    "Notas/Funções Distribuicão Estatísticas no Excel.md",
+    "Notas/Transformação de Variáveis.md",
+    "Notas/Variancia Amostral.md",
+    "PDFs/Exercícios/05 - Distribuições Conjuntas de Probabilidade.pdf",
+    "Untitled/checklist de estudo.md",
+    "PDFs/Livro-estatistica.pdf",
     "Recurso Est 19-20.md",
     "Untitled.base",
     "PDFs/Tabelas de Estatística.pdf",
@@ -209,13 +212,6 @@
     "PDFs/Slides/08 - Estimacao Pontual - Slides.pdf",
     "PDFs/Slides/07 - Geracao de amostras recorrendo a tecnica de Monte Carlo.pdf",
     "PDFs/Slides/06 - Amostragem Aleatória e Distribuições por Amostragem - Slides.pdf",
-    "PDFs/Slides/05 - Distribuições Discretas e Contínuas Importantes - Slides.pdf",
-    "PDFs/Slides/04 - Variáveis Aleatórias. Distribuições de Probabilidade - Slides.pdf",
-    "Notas/Variancia Amostral.md",
-    "Notas/Transformação de Variáveis.md",
-    "Notas/Distribuições e Aproximações.md",
-    "Notas/Funções Distribuicão Estatísticas no Excel.md",
-    "Notas/Probabilidade Condicional e Teorema de Bayes.md",
     "Welcome.md"
   ]
 }

@@ -91,11 +91,12 @@ def teste_t_media_uma_amostra(
 
 if __name__ == "__main__":
     teste_t_media_uma_amostra(
-        media_amostral = 10.5,    # média x̄
-        n = 15,                   # n
-        mu0 = 10.0,               # valor de H0
-        s = 2.0,                  # desvio padrão amostral s
-        alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas',# tipo
-        # show_plot = True        # Descomente para ver o gráfico
+        media_amostral = 10.5,    # média amostral observada (x̄)
+        n = 15,                   # tamanho da amostra (n)
+        mu0 = 10.0,               # média hipotética (H0: μ = mu0)
+        s = 2.0,                  # desvio padrão amostral (s)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda' ou 'cauda_direita'
+        mu_alternativo = 11.5,    # valor de μ sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico da distribuição t
     )

@@ -86,6 +86,12 @@ def teste_t_amostras_emparelhadas(
 
 if __name__ == "__main__":
     teste_t_amostras_emparelhadas(
-        media_diff = 2.5, n = 10, sd = 1.2,
-        # show_plot = True        # Descomente para ver o gráfico
+        media_diff = 2.5,         # média das diferenças observadas (d̄)
+        n = 10,                   # número de pares (n)
+        sd = 1.2,                 # desvio padrão das diferenças (sd)
+        diff0 = 0.0,              # diferença hipotética (H0: μΔ = diff0)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        diff_alternativa = 3.0,   # diferença real sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico da distribuição t
     )

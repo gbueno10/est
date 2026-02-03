@@ -84,6 +84,12 @@ def teste_z_amostras_emparelhadas(
 
 if __name__ == "__main__":
     teste_z_amostras_emparelhadas(
-        media_diff = 2.5, n = 40, sigma_d = 1.5,
-        # show_plot = True        # Descomente para ver o gráfico
+        media_diff = 2.5,         # média das diferenças observadas (d̄)
+        n = 40,                   # tamanho da amostra (n ≥ 30)
+        sigma_d = 1.5,            # desvio padrão das diferenças (σd) conhecido ou aproximado
+        diff0 = 0.0,              # diferença hipotética (H0: μΔ = diff0)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        diff_alternativa = 3.0,   # diferença real sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico da distribuição Normal
     )

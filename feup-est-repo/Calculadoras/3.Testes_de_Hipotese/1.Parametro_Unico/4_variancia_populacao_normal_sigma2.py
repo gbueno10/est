@@ -93,10 +93,11 @@ def teste_qui_quadrado_variancia(
 
 if __name__ == "__main__":
     teste_qui_quadrado_variancia(
-        var_amostral = 4.5,       # s²
-        n = 20,                   # n
-        sigma2_0 = 4.0,           # H0: sigma² = 4.0
-        alfa = 0.05,              # significância
-        tipo_teste = 'duas_caudas',# tipo
-        # show_plot = True        # Descomente para ver o gráfico
+        var_amostral = 4.5,       # variância observada na amostra (s²)
+        n = 20,                   # tamanho da amostra (n)
+        sigma2_0 = 4.0,           # variância hipotética (H0: σ² = sigma2_0)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        sigma2_alternativo = 5.0, # valor de σ² sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico da distribuição Qui-Quadrado
     )

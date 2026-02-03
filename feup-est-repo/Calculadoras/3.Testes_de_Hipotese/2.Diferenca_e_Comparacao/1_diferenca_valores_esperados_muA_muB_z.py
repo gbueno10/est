@@ -87,8 +87,15 @@ def teste_z_diferenca_medias(
 
 if __name__ == "__main__":
     teste_z_diferenca_medias(
-        media1 = 15.0, n1 = 40, sigma1 = 2.5,
-        media2 = 13.5, n2 = 35, sigma2 = 3.0,
-        diff0 = 0.0, alfa = 0.05, tipo_teste = 'duas_caudas',
-        # show_plot = True        # Descomente para ver o gráfico
+        media1 = 15.0,            # média amostra A (x̄A)
+        n1 = 40,                  # tamanho da amostra A (n1)
+        sigma1 = 2.5,             # desvio padrão de A (σ1) conhecido
+        media2 = 13.5,            # média amostra B (x̄B)
+        n2 = 35,                  # tamanho da amostra B (n2)
+        sigma2 = 3.0,             # desvio padrão de B (σ2) conhecido
+        diff0 = 0.0,              # diferença hipotética (H0: μA - μB = diff0)
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        diff_alternativa = 1.0,   # diferença real sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico de regiões de rejeição
     )

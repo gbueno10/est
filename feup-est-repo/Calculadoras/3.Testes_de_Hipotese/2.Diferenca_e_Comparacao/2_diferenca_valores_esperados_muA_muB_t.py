@@ -103,8 +103,16 @@ def teste_t_diferenca_medias(
 
 if __name__ == "__main__":
     teste_t_diferenca_medias(
-        media1 = 12.5, n1 = 15, s1 = 1.8,
-        media2 = 11.0, n2 = 12, s2 = 2.2,
-        variancias_iguais = True,
-        # show_plot = True        # Descomente para ver o gráfico
+        media1 = 12.5,            # média amostra A
+        n1 = 15,                  # n de A
+        s1 = 1.8,                 # desvio padrão amostral de A (s1)
+        media2 = 11.0,            # média amostra B
+        n2 = 12,                  # n de B
+        s2 = 2.2,                 # desvio padrão amostral de B (s2)
+        diff0 = 0.0,              # diferença hipotética (H0: μA - μB = diff0)
+        variancias_iguais = True, # True: variâncias iguais (agrupada), False: Welch
+        alfa = 0.05,              # nível de significância (α)
+        tipo_teste = 'duas_caudas',# tipo: 'duas_caudas', 'cauda_esquerda', 'cauda_direita'
+        diff_alternativa = 1.0,   # diferença real sob Ha para cálculo de poder (opcional)
+        show_plot = True          # exibir gráfico da distribuição t
     )

@@ -66,8 +66,9 @@ def intervalo_confianca_amostras_emparelhadas(
 if __name__ == "__main__":
     # Exemplo: Notas antes e depois de um treinamento
     intervalo_confianca_amostras_emparelhadas(
-        media_diff = 2.5,        # aumento médio de 2.5 pontos
-        std_diff = 1.2,          # desvio padrão da melhora
-        n = 10,                  # 10 alunos
-        nivel_confianca = 0.95   # nível de confiança
+        diferencas = [2, 3, 1, 4, 3, 2, 5, 2, 1, 2], # lista de diferenças (opcional)
+        media_diff = 2.5,        # aumento médio de 2.5 pontos (se 'diferencas' for None)
+        std_diff = 1.2,          # desvio padrão da melhora (se 'diferencas' for None)
+        n = 10,                  # tamanho da amostra (se 'diferencas' for None)
+        nivel_confianca = 0.95   # nível de confiança (1-α)
     )

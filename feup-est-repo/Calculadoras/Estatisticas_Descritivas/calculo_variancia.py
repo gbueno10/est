@@ -101,13 +101,19 @@ def exibir_resultados(titulo, res):
 
 if __name__ == "__main__":
     # Exemplo 1: Dados Brutos (Notas, Alturas, etc)
-    #lista_exemplo = [18, 20, 20, 22, 25]
-    #res_a = calcular_variancia_bruta(lista_exemplo)
-    #exibir_resultados("CENÁRIO A: DADOS BRUTOS", res_a)
+    # Lista simples de valores observados
+    lista_exemplo = [18, 20, 20, 22, 25]  # xi
+    res_a = calcular_variancia_bruta(
+        dados = lista_exemplo             # lista ou array de dados brutos
+    )
+    exibir_resultados("CENÁRIO A: DADOS BRUTOS", res_a)
 
     # Exemplo 2: Dados Agrupados (Frequências)
     # Ex: Número de gols marcados em uma temporada
-    gols = [0,1,2,3,4,5,6,7,8]      # xk
-    jogos = [4,12,18,6,5,3,1,0,1]     # nk (frequência absoluta)
-    res_b = calcular_variancia_agrupada(gols, jogos)
+    gols = [0, 1, 2, 3, 4, 5, 6, 7, 8]    # valores observados (xk)
+    jogos = [4, 12, 18, 6, 5, 3, 1, 0, 1] # frequências absolutas (nk)
+    res_b = calcular_variancia_agrupada(
+        valores = gols,                   # lista de valores (xi)
+        frequencias = jogos               # lista de frequências (ni)
+    )
     exibir_resultados("CENÁRIO B: DADOS AGRUPADOS", res_b)

@@ -61,8 +61,9 @@ def intervalo_confianca_media_z(
 
 if __name__ == "__main__":
     intervalo_confianca_media_z(
-        media_amostral = 10.5,     # média amostral (x̄)
-        desvio_padrao_pop = 2.0,   # desvio padrão populacional (σ)
-        n = 30,                    # tamanho da amostra (n)
-        nivel_confianca = 0.95     # nível de confiança
+        media_amostral = 10.5,    # média amostral (x̄)
+        desvio_padrao_pop = 2.0,  # desvio padrão populacional (σ) conhecido
+        n = 30,                   # tamanho da amostra (n)
+        nivel_confianca = 0.95,   # nível de confiança (1-α)
+        M = 500                   # tamanho da população (M) para correção finita (opcional)
     )

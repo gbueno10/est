@@ -94,10 +94,39 @@ def dimensionar_n_variancia(
 
 if __name__ == "__main__":
     print("--- Exemplos de Dimensionamento ---")
-    dimensionar_n_media(erro_maximo=0.2, desvio_padrao=1.5, nivel_confianca=0.95)
+    
+    # Dimensionamento para a Média
+    dimensionar_n_media(
+        erro_maximo = 0.2,       # erro máximo permitido (E)
+        desvio_padrao = 1.5,     # desvio padrão (σ) ou estimativa s
+        nivel_confianca = 0.95,  # nível de confiança (1-α)
+        M = 1000                 # tamanho da população finita (opcional)
+    )
     print()
-    dimensionar_n_proporcao(erro_maximo=0.03, p_estimado=0.5, nivel_confianca=0.95)
+    
+    # Dimensionamento para a Proporção
+    dimensionar_n_proporcao(
+        erro_maximo = 0.03,      # erro máximo (ex: 3% = 0.03)
+        p_estimado = 0.5,        # estimativa de p (0.5 para caso conservador)
+        nivel_confianca = 0.95,  # nível de confiança (1-α)
+        M = None                 # tamanho da população (opcional)
+    )
     print()
+
+    # Dimensionamento para a Diferença de Médias
+    dimensionar_n_diferenca_medias(
+        erro_maximo = 1.0,       # erro máximo na diferença (E)
+        sigma1 = 2.0,            # σ da população 1
+        sigma2 = 2.5,            # σ da população 2
+        nivel_confianca = 0.95   # nível de confiança (1-α)
+    )
+    print()
+
+    # Dimensionamento para a Variância
+    dimensionar_n_variancia(
+        erro_relativo = 0.10,    # erro relativo (ex: 10% = 0.10)
+        nivel_confianca = 0.95   # nível de confiança (1-α)
+    )
     dimensionar_n_diferenca_medias(erro_maximo=0.5, sigma1=2.0, sigma2=2.0)
     print()
     dimensionar_n_variancia(erro_relativo=0.10)
